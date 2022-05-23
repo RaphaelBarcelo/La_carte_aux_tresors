@@ -1,0 +1,65 @@
+﻿<Window x:Class="La_carte_aux_tresors.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:La_carte_aux_tresors"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+                <TextBox Name="inputPathTextBox"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="1">
+                <Button Click="ButtonPath1Click">Button 1</Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="2">
+                <Button Click="ButtonPath2Click">Button 2</Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="3">
+                <Button Click="ButtonPath3Click">Button 3</Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="4">
+                <Button Click="ButtonPath4Click">Button 4</Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="center" VerticalAlignment="Top" Grid.Column="2">
+                <Button Click="StartGame">Valider</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
