@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace La_carte_aux_tresors
 {
@@ -16,17 +10,15 @@ namespace La_carte_aux_tresors
         public List<Treasure> _treasures { get; set; }
         public Adventurer _adventurer { get; set; }
         public Entity[,] _map { get; set; }
-        public GameManager(List<string> fileLines)
+
+        public GameManager()
         {
             _mountains = new List<Mountain>();
             _treasures = new List<Treasure>();
-            initializeData(fileLines);
-
         }
-
         public void initializeData(List<string> fileLines)
         {
-            char[] separators = new char[] {' ', '-' };
+            char[] separators = new char[] {' ', '-'};
 
             string[] firstLine = fileLines.First().Split(separators, StringSplitOptions.RemoveEmptyEntries);
             int mapWidth = Int32.Parse(firstLine[1]);
@@ -47,25 +39,21 @@ namespace La_carte_aux_tresors
                     case "M":
                         int xCoordinatesM = Int32.Parse(parsedLine[1]);
                         int yCoordinatesM = Int32.Parse(parsedLine[2]);
-                        Mountain mountain = new Mountain(xCoordinatesM, yCoordinatesM);
+                        Mountain mountain = new Mountain(parsedLine);
                         _mountains.Add(mountain);
                         _map[xCoordinatesM, yCoordinatesM] = mountain;
                         break;
                     case "T":
                         int xCoordinatesT = Int32.Parse(parsedLine[1]);
                         int yCoordinatesT = Int32.Parse(parsedLine[2]);
-                        int totalTreasures = Int32.Parse(parsedLine[3]);
-                        Treasure treasure = new Treasure(totalTreasures);
+                        Treasure treasure = new Treasure(parsedLine);
                         _treasures.Add(treasure);
                         _map[xCoordinatesT, yCoordinatesT] = treasure;
                         break;
                     case "A":
-                        string name = parsedLine[1];
                         int xCoordinatesA = Int32.Parse(parsedLine[2]);
                         int yCoordinatesA = Int32.Parse(parsedLine[3]);
-                        char direction = char.Parse(parsedLine[3]);
-                        string moveset = parsedLine[4];
-                        _adventurer = new Adventurer(name, xCoordinatesA, yCoordinatesA, direction, moveset);
+                        _adventurer = new Adventurer(parsedLine);
                         _map[xCoordinatesA, yCoordinatesA] = _adventurer;
                         break;
                 }

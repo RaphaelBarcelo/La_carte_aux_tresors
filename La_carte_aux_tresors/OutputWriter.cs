@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System;
 using System.IO;
-using System.Text;
 
 namespace La_carte_aux_tresors
 {
     public class OutputWriter
     {
         [STAThread]
-        public static void Write(string output = "", string path = "../Res/Output/Output.txt")
+        public static void Write(string output, string path)
         {
             try
             {

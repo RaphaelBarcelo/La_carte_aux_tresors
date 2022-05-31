@@ -9,57 +9,41 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            <TextBox Name="inputPathTextBox" IsReadOnly="true"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="left" VerticalAlignment="Center">
+            <Button Click="OpenFileDialog_input ">Choose File</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+            <TextBox Name="outputPathTextBox" IsReadOnly="true"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="left" VerticalAlignment="Center">
+            <Button Click="OpenFileDialog_output ">Choose File</Button>
+        </StackPanel>
+        <Grid Grid.Row="3" Grid.Column="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
-                <TextBox Name="inputPathTextBox"/>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                <Button Name="ButtonRun" Click="Run" IsEnabled="False">Run</Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" >
+                <Button Name="ButtonOpenFile" Click="OpenFile" IsEnabled="False">Open File</Button>
             </StackPanel>
         </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="1">
-                <Button Click="ButtonPath1Click">Button 1</Button>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="2">
-                <Button Click="ButtonPath2Click">Button 2</Button>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="3">
-                <Button Click="ButtonPath3Click">Button 3</Button>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="center" VerticalAlignment="center" Grid.Column="4">
-                <Button Click="ButtonPath4Click">Button 4</Button>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel HorizontalAlignment="center" VerticalAlignment="Top" Grid.Column="2">
-                <Button Click="StartGame">Valider</Button>
-            </StackPanel>
-        </Grid>
+        
     </Grid>
 </Window>

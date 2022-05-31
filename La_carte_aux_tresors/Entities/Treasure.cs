@@ -16,6 +16,11 @@ namespace La_carte_aux_tresors
             _remainingTreasures = _totalTreasure;
         }
 
+        public Treasure(string[] parsedLine) : base(Int32.Parse(parsedLine[1]), Int32.Parse(parsedLine[2])) 
+        {
+            _remainingTreasures = Int32.Parse(parsedLine[3]);
+        }
+
         public override string toOutput_exhaustive()
         {
             Debug.Print("printing");

@@ -21,9 +21,17 @@ namespace La_carte_aux_tresors
             _nbTreasuresGathered = 0;
         }
 
-        public void move(GameManager gameSetup)
+        public Adventurer(string[] parsedLine) : base(Int32.Parse(parsedLine[2]), Int32.Parse(parsedLine[3]))
         {
-            Entity[,] map = gameSetup._map;
+            _name = parsedLine[1];
+            _orientation = char.Parse(parsedLine[4]);
+            _moveset = parsedLine[5];
+            _nbTreasuresGathered = 0;
+        }
+
+        public void move(GameManager gameManager)
+        {
+            Entity[,] map = gameManager._map;
             char[] moveset = _moveset.ToCharArray();
             foreach (char move in moveset)
             {
@@ -63,9 +71,9 @@ namespace La_carte_aux_tresors
                         {
                             _nbTreasuresGathered++;
                             Treasure treasure = (Treasure)map[_xCoordinates, _yCoordinates];
-                            if (treasure._remainingTreasures - 1 == 0)
+                            if (treasure._remainingTreasures--  == 0)
                             {
-                                gameSetup._treasures.Remove(treasure);
+                                gameManager._treasures.Remove(treasure);
                                 map[_xCoordinates, _yCoordinates] = new Plain();
                             }
                         }
@@ -117,6 +125,19 @@ namespace La_carte_aux_tresors
         public override string toOutput_simplified()
         {
             throw new NotImplementedException();
+        }
+
+        public override bool compareTo(Entity entity)
+        {
+            bool result = true;
+            Adventurer adventurer = (Adventurer)entity;
+            if (adventurer == null) return false;
+            if (this == adventurer) return true;
+            result = _name == adventurer._name &&
+                    _orientation == adventurer._orientation &&
+                    _moveset == adventurer._moveset &&
+                    _nbTreasuresGathered == adventurer._nbTreasuresGathered;
+            return false;
         }
     }
 }

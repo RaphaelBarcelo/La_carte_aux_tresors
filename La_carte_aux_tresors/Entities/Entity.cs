@@ -18,5 +18,6 @@ namespace La_carte_aux_tresors
 
         public abstract string toOutput_exhaustive();
         public abstract string toOutput_simplified();
+        public abstract bool compareTo(Entity entity);
     }
 }

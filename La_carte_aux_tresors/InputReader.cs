@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 
 namespace La_carte_aux_tresors
 {
@@ -17,8 +11,8 @@ namespace La_carte_aux_tresors
         {
         }
 
-        [STAThread]
-        public static List<string> ReadFile(string filePath = "../Res/Input/Input.txt")
+       [STAThread]
+        public static List<string> ReadFile(string filePath)
         {
             List<string> fileLines = new List<string>();
             String line;
@@ -31,6 +25,9 @@ namespace La_carte_aux_tresors
                 //Continue to read until you reach end of file
                 while (line != null)
                 {
+                    Debug.WriteLine("---------############################################---------------------");
+                    Debug.WriteLine(line);
+                    Debug.WriteLine("----###############################--------------------------");
                     //add the line to the list
                     fileLines.Add(line);
                     //Read the next line

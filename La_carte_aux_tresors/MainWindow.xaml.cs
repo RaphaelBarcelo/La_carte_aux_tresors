@@ -1,22 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.CompilerServices;
+﻿using Microsoft.Win32;
 using System.Diagnostics;
-
-
+using System.Windows;
 namespace La_carte_aux_tresors
 {
     /// <summary>
@@ -24,42 +8,70 @@ namespace La_carte_aux_tresors
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool inputChosen;
+        bool outputChosen;
         public MainWindow()
         {
             this.DataContext = this;
             InitializeComponent();
-            inputPathTextBox.Text = "Insert map file path here";
+            inputPathTextBox.Text = "Open input file";
+            outputPathTextBox.Text = "Open output file";
+            inputChosen = false;
+            outputChosen = false;
         }
 
-        public void ButtonPath1Click(object sender, RoutedEventArgs e)
+        public void OpenFileDialog_input(object sender, RoutedEventArgs e)
         {
-            inputPathTextBox.Text = "nouveau chemin crée par bouton 1";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "All Files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                inputPathTextBox.Text = openFileDialog.FileName;      
+            }
+            inputChosen = true;
+            if (outputChosen)
+            {
+                ButtonRun.IsEnabled = true;
+            }
+            ButtonOpenFile.IsEnabled = false;
         }
 
-        public void ButtonPath2Click(object sender, RoutedEventArgs e)
+        public void OpenFileDialog_output(object sender, RoutedEventArgs e)
         {
-            inputPathTextBox.Text = "nouveau chemin crée par bouton 2";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "All Files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                outputPathTextBox.Text = openFileDialog.FileName;
+            }
+            outputChosen = true;
+            if (inputChosen)
+            {
+                ButtonRun.IsEnabled = true;
+            }
+            ButtonOpenFile.IsEnabled = false;
         }
 
-        public void ButtonPath3Click(object sender, RoutedEventArgs e)
+        public void Run(object sender, RoutedEventArgs e)
         {
-            inputPathTextBox.Text = "nouveau chemin crée par bouton 3";
+            string absolutePath_input = inputPathTextBox.Text;
+            string absolutePath_output = outputPathTextBox.Text;
+            GameManager gameManager = new GameManager();
+            gameManager.initializeData(InputReader.ReadFile(absolutePath_input));
+            gameManager._adventurer.move(gameManager);
+            OutputWriter.Write(gameManager.mapToOutput(), absolutePath_output);
+            ButtonOpenFile.IsEnabled = true;
         }
 
-        public void ButtonPath4Click(object sender, RoutedEventArgs e)
+        public void OpenFile(object sender, RoutedEventArgs e)
         {
-            inputPathTextBox.Text = "nouveau chemin crée par bouton 4";
+            Process.Start("notepad.exe", outputPathTextBox.Text);
         }
 
-        public void StartGame(object sender, RoutedEventArgs e)
-        {
-            GameManager gameSetup = new GameManager(InputReader.ReadFile());
-            gameSetup._adventurer.move(gameSetup);
-            OutputWriter.Write(gameSetup.mapToOutput());
-        }
 
-        
-
-        
     }
 }
